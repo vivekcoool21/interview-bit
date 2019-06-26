@@ -1,0 +1,72 @@
+vector<int> Solution::equal(vector<int> &A) {
+    
+    int a=0, b=0, c=0, d=0;
+    int sum=0;
+    int s = A.size();
+    
+    vector<int> ans;
+    vector<int> temp(4);
+    
+    map <int, int> hasha;
+    map <int, int> hashb;
+    
+    for( int i=0; i<s-1; i++ ){
+        
+        for( int j=i+1; j<s; j++ ){
+            
+            sum = A[i]+A[j];
+            
+            if( hasha.find( sum ) != hasha.end() ){
+                
+                a = hasha[sum];
+                b = hashb[sum];
+                c = i;
+                d = j;
+                
+                if( a<b && c<d && a<c && b!=c && b!=d ){
+                    
+                    if( ans.empty() ){
+                        
+                        for( int v=0; v<4; v++ ){
+                                
+                            ans.push_back(INT_MAX);
+                        }
+                    }
+                    
+                    temp[0] = a;
+                    temp[1] = b;
+                    temp[2] = c;
+                    temp[3] = d;
+                    
+                    for( int t=0; t<4; t++ ){
+                        
+                        if( temp[t] != ans[t] ){
+                        
+                            if( temp[t]<ans[t] ){
+                            
+                                for( int v=0; v<4; v++ ){
+                                    
+                                    ans[v] = temp[v];
+                                }
+                                
+                                break;
+                            }
+                            
+                            else
+                                break;
+                        }  
+                    }
+                }
+            }
+            
+            else{
+                
+                hasha.insert( make_pair( sum, i ) );
+                hashb.insert( make_pair( sum, j ) );
+            }
+            
+        }
+    }
+    
+    return ans;
+}
