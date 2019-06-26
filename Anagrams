@@ -26,6 +26,6 @@ vector<vector<int> > Solution::anagrams(const vector<string> &A) {
             ans.push_back(vect);
         }
     }
-    
+    //gg
     return ans;
 }
